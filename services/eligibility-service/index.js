@@ -10,11 +10,7 @@ app.use(express.json());
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-/**
- * Cleans a Gemini response by removing Markdown formatting (backticks, ```json).
- * @param {string} text - Raw response from Gemini.
- * @returns {string} - Cleaned JSON string.
- */
+
 function cleanResponse(text) {
   return text
     .replace(/```json/g, "")
@@ -23,9 +19,7 @@ function cleanResponse(text) {
     .trim();
 }
 
-/**
- * Evaluates loan eligibility using Gemini API.
- */
+
 app.post("/api/eligibility", async (req, res) => {
   const { income, creditScore, loanAmount } = req.body;
 
